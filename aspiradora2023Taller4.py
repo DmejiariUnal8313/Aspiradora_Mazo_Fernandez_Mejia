@@ -76,7 +76,7 @@ class Ambiente(object):
 
         self.C=turtle.Turtle()
         self.C.penup()
-        self.C.setpos(120, -200)
+        self.C.setpos(-120, -200)
         self.C.begin_fill()
         self.C.shape("square")
         self.C.turtlesize(5)
@@ -86,7 +86,7 @@ class Ambiente(object):
 
         self.D=turtle.Turtle()
         self.D.penup()
-        self.D.setpos(-120, -200)
+        self.D.setpos(120, -200)
         self.D.begin_fill()
         self.D.shape("square")
         self.D.turtlesize(5)
@@ -100,64 +100,33 @@ class IAspirador(Ambiente):
         # Localización del aspirador, si el salon es A o B
         global localizacionAspirador
 
-        if Ambiente.localizacion["A"] == 0 and Ambiente.localizacion["B"] == 0 and Ambiente.localizacion["C"] == 0 and Ambiente.localizacion["D"] == 0:
+        if Ambiente.localizacion["A"] == 0:
             Ambiente.A.color("green")
-            Ambiente.B.color("green")
-            Ambiente.C.color("green")
-            Ambiente.D.color("green")
 
-        elif Ambiente.localizacion["A"] == 0 and Ambiente.localizacion["B"] == 0 and Ambiente.localizacion["C"] == 0:
-            Ambiente.A.color("green")
+        if Ambiente.localizacion["B"] == 0:
             Ambiente.B.color("green")
+
+        if Ambiente.localizacion["C"] == 0:
             Ambiente.C.color("green")
 
-        elif Ambiente.localizacion["A"] == 0 and Ambiente.localizacion["B"] == 0 and Ambiente.localizacion["D"] == 0:
-            Ambiente.A.color("green")
-            Ambiente.B.color("green")
+        if Ambiente.localizacion["D"] == 0:
             Ambiente.D.color("green")
-
-        elif Ambiente.localizacion["A"] == 0 and Ambiente.localizacion["C"] == 0 and Ambiente.localizacion["D"] == 0:
-            Ambiente.A.color("green")
-            Ambiente.C.color("green")
-            Ambiente.D.color("green")
-
-        elif Ambiente.localizacion["B"] == 0 and Ambiente.localizacion["C"] == 0 and Ambiente.localizacion["D"] == 0:
-            Ambiente.B.color("green")
-            Ambiente.C.color("green")
-            Ambiente.D.color("green")
-
-        elif Ambiente.localizacion["A"] == 0 and Ambiente.localizacion["B"] == 0:
-            Ambiente.A.color("green")
-            Ambiente.B.color("green")
-            # Puedes agregar el código correspondiente aquí
-
-        elif Ambiente.localizacion["A"] == 0 and Ambiente.localizacion["C"] == 0:
-            Ambiente.A.color("green")
-            Ambiente.C.color("green")
-            # Puedes agregar el código correspondiente aquí
-
-        elif Ambiente.localizacion["A"] == 0 and Ambiente.localizacion["D"] == 0:
-            Ambiente.A.color("green")
-            Ambiente.D.color("green")
-            # Puedes agregar el código correspondiente aquí
-
-        elif Ambiente.localizacion["B"] == 0 and Ambiente.localizacion["C"] == 0:
-            Ambiente.B.color("green")
-            Ambiente.C.color("green")
-            # Puedes agregar el código correspondiente aquí
-
-        elif Ambiente.localizacion["B"] == 0 and Ambiente.localizacion["D"] == 0:
-            Ambiente.B.color("green")
-            Ambiente.D.color("green")
-            # Puedes agregar el código correspondiente aquí
-
-        elif Ambiente.localizacion["C"] == 0 and Ambiente.localizacion["D"] == 0:
-            Ambiente.C.color("green")
-            Ambiente.D.color("green")
-
         
         
-        localizacionAspirador=random.choice(["A","B","C","D"])
+        
+        # localizacionAspirador=random.choice(["A","B","C","D"])
+        if Ambiente.localizacion["A"] == 1:
+            localizacionAspirador="A"
+
+        elif Ambiente.localizacion["B"] == 1:
+            localizacionAspirador="B"
+
+        elif Ambiente.localizacion["C"] == 1:
+            localizacionAspirador="C"
+
+        elif Ambiente.localizacion["D"] == 1:
+            localizacionAspirador="D"
+
         
         print(40*"*")
         print("El ambiente esta: ",Ambiente.localizacion)
@@ -167,7 +136,7 @@ class IAspirador(Ambiente):
         global Asp
         Asp=turtle.Turtle()
         Asp.penup()
-        Asp.setpos(0,0)
+        Asp.setpos(0,-100)
         Asp.begin_fill()
         Asp.shape("circle")
         #Asp.turtlesize(5)
@@ -192,53 +161,116 @@ class IAspirador(Ambiente):
             result1="El lado A ya se encuentra limpio, por ende la aspiradora no se mueve \n"
             Ambiente.cont +=1
             Asp.speed(10)
-            Asp.setpos(0,0)
+            Asp.setpos(0,-100)
             return print(result1)
         
         elif (localizacionAspirador=="A" or localizacionAspirador=="B") or (Ambiente.localizacion["A"]==0 and Ambiente.localizacion["B"]==0):
             result1="Los dos lados ya se encuentran limpios, la aspiradora no se mueve \n"
             Ambiente.cont +=1
             Asp.speed(10)
-            Asp.setpos(0,0)
+            Asp.setpos(0,-100)
             return print(result1)
         else:
             result2="El lado B ya se encuentra limpio, por ende la aspiradora no se mueve \n"
             Ambiente.cont +=1
             Asp.speed(10)
-            Asp.setpos(0,0)
+            Asp.setpos(0,-100)
             return print(result2)
     
     def verifica_estado_ambiente(self,Ambiente):
         # Si el lado A estuviese sucio
-        if Ambiente.localizacion["A"]==1 and Ambiente.localizacion["B"]==0:
-                Ambiente.cont +=1
-                print("El lado A esta sucio...")
-                IAspirador.aspiraA(self,Ambiente)
+        if Ambiente.localizacion["A"]==1:
+            Ambiente.cont +=1
+            print("El lado A está sucio")
+            IAspirador.aspiraA(self,Ambiente)
 
-        elif Ambiente.localizacion["A"]==0 and Ambiente.localizacion["B"]==1:
+            if Ambiente.localizacion["B"]==1:
                 Ambiente.cont +=1
-                print("El lado B esta sucio...")
+                print("El lado B está sucio")
                 IAspirador.aspiraB(self,Ambiente)
-                # IAspirador.moverse(self, Ambiente)
-                # print("El lado A ya esta limpio")
-        elif Ambiente.localizacion["A"]==1 and Ambiente.localizacion["B"]==1:
-            if localizacionAspirador=="A":
+
+                if Ambiente.localizacion["C"]==1:
+                    Ambiente.cont +=1
+                    print("El lado C está sucio")
+                    IAspirador.aspiraC(self,Ambiente)
+
+                    if Ambiente.localizacion["D"]==1:
+                        Ambiente.cont +=1
+                        print("El lado D está sucio")
+                        IAspirador.aspiraD(self,Ambiente)
+                        print("Todos los lados están limpios")
+                    else:
+                        print("Todos los lados se encuentran limpio")
+                elif Ambiente.localizacion["D"]==1:
+                        Ambiente.cont +=1
+                        print("El lado D está sucio")
+                        IAspirador.aspiraD(self,Ambiente)
+                        print("Todos los lados están limpios")
+                else:
+                    print("Todos los lados están limpios")
+            elif Ambiente.localizacion["C"]==1:
                 Ambiente.cont +=1
-                print("El lado A esta sucio...")
-                IAspirador.aspiraA(self,Ambiente)
-                IAspirador.moverse(self,Ambiente)
-                print("El lado B esta sucio...")
-                IAspirador.aspiraB(self,Ambiente)
+                print("El lado C está sucio")
+                IAspirador.aspiraC(self,Ambiente)
+
+                if Ambiente.localizacion["D"]==1:
+                    Ambiente.cont +=1
+                    print("El lado D está sucio")
+                    IAspirador.aspiraD(self,Ambiente)
+                    print("Todos los lados están limpios")
+                else:
+                    print("Todos los lados se encuentran limpio")
+            elif Ambiente.localizacion["D"]==1:
+                        Ambiente.cont +=1
+                        print("El lado D está sucio")
+                        IAspirador.aspiraD(self,Ambiente)
+                        print("Todos los lados están limpios")
             else:
+                 print("Todos los lados están limpios")
+        
+        elif Ambiente.localizacion["B"]==1:
+            Ambiente.cont +=1
+            print("El lado B está sucio")
+            IAspirador.aspiraB(self,Ambiente)
+            if Ambiente.localizacion["C"]==1:
                 Ambiente.cont +=1
-                print("El lado B esta sucio...")
-                IAspirador.aspiraB(self,Ambiente)
-                IAspirador.moverse(self, Ambiente)
-                print("El lado A esta sucio...")
-                IAspirador.aspiraA(self,Ambiente)
+                print("El lado C está sucio")
+                IAspirador.aspiraC(self,Ambiente)
+
+                if Ambiente.localizacion["D"]==1:
+                    Ambiente.cont +=1
+                    print("El lado D está sucio")
+                    IAspirador.aspiraD(self,Ambiente)
+                    print("Todos los lados están limpios")
+                else:
+                    print("Todos los lados se encuentran limpios")
+            elif Ambiente.localizacion["D"]==1:
+                    Ambiente.cont +=1
+                    print("El lado D está sucio")
+                    IAspirador.aspiraD(self,Ambiente)
+                    print("Todos los lados están limpios")
+            else:
+                print("Todos los lados están limpios")
+        elif Ambiente.localizacion["C"]==1:
+            Ambiente.cont +=1
+            print("El lado C está sucio")
+            IAspirador.aspiraC(self,Ambiente)
+
+            if Ambiente.localizacion["D"]==1:
+                Ambiente.cont +=1
+                print("El lado D está sucio")
+                IAspirador.aspiraD(self,Ambiente)
+                print("Todos los lados están limpios")
+            else:
+                print("Todos los lados se encuentran limpios")
+        elif Ambiente.localizacion["D"]==1:
+                Ambiente.cont +=1
+                print("El lado D está sucio")
+                IAspirador.aspiraD(self,Ambiente)
+                print("Todos los lados están limpios")
         else:
-            Ambiente.cont = 0
-            print("\n --- Los dos lados ya se encontraban limpios ---")
+            print("Todos los lados se encuentran limpios")
+
     
     def aspiraA(self, Ambiente):
         Ambiente.cont +=1
@@ -254,23 +286,175 @@ class IAspirador(Ambiente):
         Asp.setpos(120,0)
         print("El lado B fue limpiado")
 
+    def aspiraC(self,Ambiente):
+        Ambiente.cont +=1
+        Ambiente.C.color("green")
+        Ambiente.localizacion["C"]=0
+        Asp.setpos(-120,-200)
+        print("El lado C fue limpiado")
+
+    def aspiraD(self,Ambiente):
+        Ambiente.cont +=1
+        Ambiente.D.color("green")
+        Ambiente.localizacion["D"]=0
+        Asp.setpos(120,-200)
+        print("El lado D fue limpiado")
+
     def moverse(self,Ambiente):
-        if localizacionAspirador=="A":
+        if Ambiente.localizacion["A"]==1:
             Ambiente.cont +=1
-            print("\nSe mueve para el lado B..\n.")
+            print("\nSe mueve la aspiradora\n")
+            print("El lado A está sucio")
+            sleep(2.25)
+            Asp.setpos(120,0)
+            # IAspirador.aspiraA(self,Ambiente)
+
+            if Ambiente.localizacion["B"]==1:
+                Ambiente.cont +=1
+                IAspirador.localizacionAspirador="B"
+                print("\nSe mueve la aspiradora\n")
+                print("El lado B está sucio")
+                sleep(2.25)
+                Asp.setpos(120,0)
+                # IAspirador.aspiraB(self,Ambiente)
+
+                if Ambiente.localizacion["C"]==1:
+                    Ambiente.cont +=1
+                    IAspirador.localizacionAspirador="C"
+                    print("\nSe mueve la aspiradora\n")
+                    print("El lado C está sucio")
+                    sleep(2.25)
+                    Asp.setpos(120,0)
+
+                    if Ambiente.localizacion["D"]==1:
+                        Ambiente.cont +=1
+                        IAspirador.localizacionAspirador="D"
+                        print("\nSe mueve la aspiradora\n")
+                        print("El lado D está sucio")
+                        sleep(2.25)
+                        Asp.setpos(120,0)
+                    else:
+                        print("Todos los lados se encuentran limpio")
+                elif Ambiente.localizacion["D"]==1:
+                        Ambiente.cont +=1
+                        IAspirador.localizacionAspirador="D"
+                        print("\nSe mueve la aspiradora\n")
+                        print("El lado D está sucio")
+                        sleep(2.25)
+                        Asp.setpos(120,0)
+                else:
+                    print("Todos los lados están limpios")
+            elif Ambiente.localizacion["C"]==1:
+                Ambiente.cont +=1
+                IAspirador.localizacionAspirador="C"
+                print("\nSe mueve la aspiradora\n")
+                print("El lado C está sucio")
+                sleep(2.25)
+                Asp.setpos(120,0)
+
+                if Ambiente.localizacion["D"]==1:
+                    Ambiente.cont +=1
+                    IAspirador.localizacionAspirador="D"
+                    print("\nSe mueve la aspiradora\n")
+                    print("El lado D está sucio")
+                    sleep(2.25)
+                    Asp.setpos(120,0)
+                else:
+                    print("Todos los lados se encuentran limpio")
+            elif Ambiente.localizacion["D"]==1:
+                IAspirador.localizacionAspirador="D"
+                print("\nSe mueve la aspiradora\n")
+                print("El lado D está sucio")
+                sleep(2.25)
+                Asp.setpos(120,0)
+            else:
+                 print("Todos los lados están limpios")
+        
+        elif Ambiente.localizacion["B"]==1:
+            Ambiente.cont +=1
             IAspirador.localizacionAspirador="B"
+            print("\nSe mueve la aspiradora\n")
+            print("El lado B está sucio")
+            sleep(2.25)
+            Asp.setpos(120,0)
+            if Ambiente.localizacion["C"]==1:
+                Ambiente.cont +=1
+                IAspirador.localizacionAspirador="C"
+                print("\nSe mueve la aspiradora\n")
+                print("El lado C está sucio")
+                sleep(2.25)
+                Asp.setpos(120,0)
+
+                if Ambiente.localizacion["D"]==1:
+                    IAspirador.localizacionAspirador="D"
+                    print("\nSe mueve la aspiradora\n")
+                    print("El lado D está sucio")
+                    sleep(2.25)
+                    Asp.setpos(120,0)
+                else:
+                    print("Todos los lados se encuentran limpios")
+            elif Ambiente.localizacion["D"]==1:
+                    IAspirador.localizacionAspirador="D"
+                    print("\nSe mueve la aspiradora\n")
+                    print("El lado D está sucio")
+                    sleep(2.25)
+                    Asp.setpos(120,0)
+            else:
+                print("Todos los lados están limpios")
+        elif Ambiente.localizacion["C"]==1:
+            Ambiente.cont +=1
+            IAspirador.localizacionAspirador="C"
+            print("\nSe mueve la aspiradora\n")
+            print("El lado C está sucio")
+            sleep(2.25)
+            Asp.setpos(120,0)
+
+            if Ambiente.localizacion["D"]==1:
+                Ambiente.cont +=1
+                IAspirador.localizacionAspirador="D"
+                print("\nSe mueve la aspiradora\n")
+                print("El lado D está sucio")
+                sleep(2.25)
+                Asp.setpos(120,0)
+            else:
+                print("Todos los lados se encuentran limpios")
+        elif Ambiente.localizacion["D"]==1:
+            Ambiente.cont +=1
+            IAspirador.localizacionAspirador="D"
+            print("\nSe mueve la aspiradora\n")
+            print("El lado D está sucio")
             sleep(2.25)
             Asp.setpos(120,0)
         else:
-            Ambiente.cont +=1
-            print("\n Se mueve para el lado A...")
-            IAspirador.localizacionAspirador="A"
-            sleep(2.25)
-            Asp.setpos(-120,0)
+            print("Todos los lados se encuentran limpios")
+        # if localizacionAspirador=="A":
+        #     Ambiente.cont +=1
+        #     print("\nSe mueve la aspiradora\n")
+        #     IAspirador.localizacionAspirador="B"
+        #     sleep(2.25)
+        #     Asp.setpos(120,0)
+        # elif localizacionAspirador=="B":
+        #     Ambiente.cont +=1
+        #     print("\nSe mueve la aspiradora\n")
+        #     IAspirador.localizacionAspirador="B"
+        #     sleep(2.25)
+        #     Asp.setpos(120,0)
+        # elif localizacionAspirador=="C":
+        #     Ambiente.cont +=1
+        #     print("\nSe mueve la aspiradora\n")
+        #     IAspirador.localizacionAspirador="B"
+        #     sleep(2.25)
+        #     Asp.setpos(120,0)
+        # else:
+        #     Ambiente.cont +=1
+        #     print("\n Se mueve la aspiradora")
+        #     IAspirador.localizacionAspirador="A"
+        #     sleep(2.25)
+        #     Asp.setpos(-120,0)
 
     def posInic(self, Ambiente):
         Ambiente.cont +=1
-        Asp.setpos(0,0)
+        Asp.setpos(0,-100)
         print(f"La cantidad de pasos realizados fue de: {Ambiente.cont}")
 
 
