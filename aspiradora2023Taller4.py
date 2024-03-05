@@ -94,10 +94,9 @@ class Ambiente(object):
         self.D.end_fill()
         self.D.penup()
 
-
 class IAspirador(Ambiente):
     def __init__(self,Ambiente):
-        # Localización del aspirador, si el salon es A o B
+        # Localización del aspirador, si el salon es A,B,C o D
         global localizacionAspirador
 
         if Ambiente.localizacion["A"] == 0:
@@ -111,8 +110,6 @@ class IAspirador(Ambiente):
 
         if Ambiente.localizacion["D"] == 0:
             Ambiente.D.color("green")
-        
-        
         
         # localizacionAspirador=random.choice(["A","B","C","D"])
         if Ambiente.localizacion["A"] == 1:
@@ -131,8 +128,6 @@ class IAspirador(Ambiente):
         print(40*"*")
         print("El ambiente esta: ",Ambiente.localizacion)
         
-        
-
         global Asp
         Asp=turtle.Turtle()
         Asp.penup()
@@ -457,7 +452,6 @@ class IAspirador(Ambiente):
         Asp.setpos(0,-100)
         print(f"La cantidad de pasos realizados fue de: {Ambiente.cont}")
 
-
 #####   LIMPIAR
 ElAmbiente=Ambiente()
 ElAspirador=IAspirador(ElAmbiente)
@@ -468,7 +462,6 @@ ElAspirador.verifica_estado_ambiente(ElAmbiente)
 sleep(3)
 ElAspirador.posInic(ElAmbiente)
 sleep(3)
-
 
 #### Al terminar muestra los dos lados limpios
 print("\nDespues de la accion del  aspirador, el ambiente esta:  ", ElAmbiente.localizacion,"\nY la aspiradora vuelve al centro.")
