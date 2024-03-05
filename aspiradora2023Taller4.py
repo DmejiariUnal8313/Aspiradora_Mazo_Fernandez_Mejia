@@ -152,26 +152,19 @@ class IAspirador(Ambiente):
             Asp.speed(10)
             Asp.setpos(120,0)
             return print(result2)
-        elif localizacionAspirador=="A" and Ambiente.localizacion["A"]==0:
-            result1="El lado A ya se encuentra limpio, por ende la aspiradora no se mueve \n"
+        elif localizacionAspirador=="C" and Ambiente.localizacion["C"]==1:
+            result1="El aspirador es colocado en el local C\n"
+            Ambiente.cont +=1
+            Asp.speed(10)
+            Asp.setpos(0,-100)
+            return print(result1)
+        elif localizacionAspirador=="D" and Ambiente.localizacion["D"]==1:
+            result1="El aspirador es colocado en el local D\n"
             Ambiente.cont +=1
             Asp.speed(10)
             Asp.setpos(0,-100)
             return print(result1)
         
-        elif (localizacionAspirador=="A" or localizacionAspirador=="B") or (Ambiente.localizacion["A"]==0 and Ambiente.localizacion["B"]==0):
-            result1="Los dos lados ya se encuentran limpios, la aspiradora no se mueve \n"
-            Ambiente.cont +=1
-            Asp.speed(10)
-            Asp.setpos(0,-100)
-            return print(result1)
-        else:
-            result2="El lado B ya se encuentra limpio, por ende la aspiradora no se mueve \n"
-            Ambiente.cont +=1
-            Asp.speed(10)
-            Asp.setpos(0,-100)
-            return print(result2)
-    
     def verifica_estado_ambiente(self,Ambiente):
         # Si el lado A estuviese sucio
         if Ambiente.localizacion["A"]==1:
@@ -422,30 +415,6 @@ class IAspirador(Ambiente):
             Asp.setpos(120,0)
         else:
             print("Todos los lados se encuentran limpios")
-        # if localizacionAspirador=="A":
-        #     Ambiente.cont +=1
-        #     print("\nSe mueve la aspiradora\n")
-        #     IAspirador.localizacionAspirador="B"
-        #     sleep(2.25)
-        #     Asp.setpos(120,0)
-        # elif localizacionAspirador=="B":
-        #     Ambiente.cont +=1
-        #     print("\nSe mueve la aspiradora\n")
-        #     IAspirador.localizacionAspirador="B"
-        #     sleep(2.25)
-        #     Asp.setpos(120,0)
-        # elif localizacionAspirador=="C":
-        #     Ambiente.cont +=1
-        #     print("\nSe mueve la aspiradora\n")
-        #     IAspirador.localizacionAspirador="B"
-        #     sleep(2.25)
-        #     Asp.setpos(120,0)
-        # else:
-        #     Ambiente.cont +=1
-        #     print("\n Se mueve la aspiradora")
-        #     IAspirador.localizacionAspirador="A"
-        #     sleep(2.25)
-        #     Asp.setpos(-120,0)
 
     def posInic(self, Ambiente):
         Ambiente.cont +=1
